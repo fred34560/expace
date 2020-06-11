@@ -8,7 +8,9 @@ use Symfony\Bridge\Twig\Mime\TemplatedEmail;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\Routing\Annotation\Route;
+use KnpU\OAuth2ClientBundle\Client\ClientRegistry;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use League\OAuth2\Client\Provider\Exception\IdentityProviderException;
 
 class HomeController extends AbstractController
 {
@@ -33,4 +35,6 @@ class HomeController extends AbstractController
     public function contact() {
         return $this->render('contact.html.twig');
     }
+
+    
 }

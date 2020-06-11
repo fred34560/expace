@@ -31,7 +31,10 @@
         <div class="container">
             <div class="row justify-content-md-center">
                 <div class="col-md-10 col-lg-8 col-xl-6">
-                    <div class="group-sm group-sm-justify group-middle"><a class="button button-facebook button-icon button-icon-left" href="#"><span class="icon fa fa-facebook"></span>Facebook</a><a class="button button-twitter button-icon button-icon-left" href="#"><span class="icon fa fa-twitter"></span>Twitter</a><a class="button button-google button-icon button-icon-left" href="#"><span class="icon fa fa-google-plus"></span>Google+</a></div>
+                    <div class="group-sm group-sm-justify group-middle">
+                        <a class="button button-facebook button-icon button-icon-left" href="{{ path('connect_facebook_start') }}"><span class="icon fa fa-facebook"></span>Facebook</a>
+                        <a class="button button-google button-icon button-icon-left" href="{{ path('connect_google_start') }}"><span class="icon fa fa-google-plus"></span>Google+</a>
+                    </div>
                     <div class="text-decoration-lines"><span class="text-decoration-lines__content">Ou</span></div>
                     <!-- RD Mailform-->
                     {{ form_start(registrationForm, { 'attr': {'class': 'rd-mailform2 rd-mailform_label-centered'} }) }}
