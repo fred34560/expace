@@ -1,0 +1,14 @@
+{% if formLoc.heureDebutLoc == 'matin' %}
+{% set horaire = '08:00:00' %}
+{% else %}
+{% set horaire = '13:00:00' %}
+{% endif %}
+
+
+{{ form_start(formLoc) }}
+  <div class="row">
+      <div id="dateDebutLoc" class="col-md-4"> {{ form_row(formLoc.dateDebutLoc) }} </div>
+      <div class="col"> {{ form_row(formLoc.heureDebutLoc) }}
+          {{ horaire }}
+      </div>
+  </div>

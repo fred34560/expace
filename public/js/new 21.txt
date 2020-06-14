@@ -1,0 +1,78 @@
+.comment-box * + .rd-mailform2 {
+	margin-top: 20px;
+}
+.rd-mailform2 {
+	position: relative;
+	text-align: left;
+}
+.rd-mailform2 .button {
+	padding-top: 10px;
+	padding-bottom: 10px;
+	min-height: 50px;
+}
+.rd-mailform2 * + .button {
+	margin-top: 25px;
+}
+.rd-mailform2.rd-mailform_label-centered .form-label-outside {
+	text-align: center;
+}
+
+.rd-mailform2.rd-mailform_label-centered * + .button {
+	margin-top: 30px;
+}
+
+.rd-mailform2.rd-mailform_label-centered .form-input:focus::-webkit-input-placeholder {
+	opacity: 0;
+}
+
+.rd-mailform2.rd-mailform_label-centered .form-input:focus::-moz-placeholder {
+	opacity: 0;
+}
+
+.rd-mailform2.rd-mailform_label-centered .form-input:focus:-moz-placeholder {
+	opacity: 0;
+}
+
+.rd-mailform2.rd-mailform_label-centered .form-input:focus:-ms-input-placeholder {
+	opacity: 0;
+}
+
+@media (min-width: 768px) {
+	.rd-mailform2.rd-mailform_label-centered {
+		padding-left: 15px;
+		padding-right: 15px;
+	}
+	.rd-mailform2.rd-mailform_label-centered * + .button {
+		margin-top: 40px;
+	}
+}
+
+@media (min-width: 1600px) {
+	.rd-mailform2.rd-mailform_label-centered * + .button {
+		margin-top: 50px;
+	}
+}
+.rd-mailform2.rd-mailform_light .form-label-outside {
+	padding-left: 20px;
+	margin-bottom: 6px;
+	color: #9b9b9b;
+	text-align: left;
+}
+
+.rd-mailform2.rd-mailform_light .form-validation {
+	right: 5px;
+}
+
+.rd-mailform2.rd-mailform_light .button {
+	width: auto;
+	padding-left: 20px;
+	padding-right: 20px;
+}
+.rd-mailform_centered .form-input,
+.rd-mailform_centered .form-label {
+	text-align: center;
+}
+
+* + .rd-form {
+	margin-top: 15px;
+}

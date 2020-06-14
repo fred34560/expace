@@ -1,28 +1,72 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Log in!{% endblock %}
+{% block title %}Accès client{% endblock %}
 
 {% block body %}
-<form method="post">
-    {% if error %}
-        <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
-    {% endif %}
 
-    {% if app.user %}
-        <div class="mb-3">
-            You are logged in as {{ app.user.username }}, <a href="{{ path('app_logout') }}">Logout</a>
+    <!-- Breadcrumbs-->
+    <section class="breadcrumbs-custom">
+        <div class="breadcrumbs-custom__aside bg-image context-dark" style="background-image: url(images/bg-image-1-1920x238.jpg);">
+            <div class="container">
+                <h2 class="breadcrumbs-custom__title">Espace client</h2>
+            </div>
         </div>
-    {% endif %}
+        <div class="breadcrumbs-custom__main bg-gray-light">
+            <div class="container">
+                <ul class="breadcrumbs-custom__path">
+                    <li><a href="index.html">Accueil</a></li>
+                    <li class="active">Connection</li>
+                </ul>
+            </div>
+        </div>
+    </section>
 
-    <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
-    <label for="inputEmail">Email</label>
-    <input type="email" value="{{ last_username }}" name="email" id="inputEmail" class="form-control" required autofocus>
-    <label for="inputPassword">Password</label>
-    <input type="password" name="password" id="inputPassword" class="form-control" required>
+    <div class="#verif_time"></div>
 
-    <input type="hidden" name="_csrf_token"
-           value="{{ csrf_token('authenticate') }}"
-    >
+        <!-- Login Form-->
+        <section class="section section-md bg-white text-center">
+            <div class="container">
+                <div class="row justify-content-md-center">
+                    <div class="col-md-10 col-lg-8 col-xl-6">
+                        <div class="group-sm group-sm-justify group-middle">
+                            <a class="button button-facebook button-icon button-icon-left" href="{{ path('connect_facebook_start') }}"><span class="icon fa fa-facebook"></span>Facebook</a>
+                            <a class="button button-google button-icon button-icon-left" href="{{ path('connect_google_start') }}"><span class="icon fa fa-google-plus"></span>Google+</a></div>
+                        <div class="text-decoration-lines"><span class="text-decoration-lines__content">Ou</span></div>
+                        <!-- RD Mailform-->
+                        <form method="post" class="rd-mailform rd-mailform_label-centered" novalidate data-form-output="form-output-global">
+                            {% if error %}
+                                <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+                            {% endif %}
+                            <div class="form-wrap">
+                                <label class="form-label-outside" for="inputEmail">E-mail</label>
+                                <input value="{{ last_username }}" class="form-input" id="inputEmail" type="email" name="email" data-constraints="@Email @Required" required>
+                            </div>
+                            <div class="form-wrap">
+                                <label  class="form-label-outside" for="inputPassword">Mot de passe</label>
+                                <input class="form-input" id="inputPassword" type="password" name="password" data-constraints="@Required" required>
+                            </div>
+                            <div class="form-wrap">
+                                <label class="checkbox-inline">
+                                    <input type="checkbox">Se souvenir de moi
+                                </label>
+                                <input type="hidden" name="_csrf_token"value="{{ csrf_token('authenticate') }}">
+                            </div>
+                            <div class="row row-20 form-wrap">
+                                <div class="col-md-6">
+                                    <button class="button button-primary button-block button-ujarak" type="submit">Se connecter</button>
+                                </div>
+                                
+                                <div class="col-md-6">
+                                    <a href="{{ path('app_register') }}" class="button button-default-outline button-block button-ujarak">Créer un compte</a>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
 
     {#
         Uncomment this section and add a remember_me option below your firewall to activate remember me functionality.
@@ -35,8 +79,4 @@
         </div>
     #}
 
-    <button class="btn btn-lg btn-primary" type="submit">
-        Sign in
-    </button>
-</form>
 {% endblock %}

@@ -1485,7 +1485,7 @@
 							form.addClass('form-in-process');
 
 							if (output.hasClass("snackbars")) {
-								output.html('<p><span class="icon text-middle fa fa-circle-o-notch fa-spin icon-xxs"></span><span>Sending</span></p>');
+								output.html('<p><span class="icon text-middle fa fa-circle-o-notch fa-spin icon-xxs"></span><span>Veuillez patienter, chargement en cours...</span></p>');
 								output.addClass("active");
 							}
 						} else {
@@ -1505,8 +1505,10 @@
 						if (formHasCaptcha) {
 							grecaptcha.reset();
 						}
+						
 					},
 					success: function (result) {
+						$('#resultat').html(result);
 						if (isNoviBuilder)
 							return;
 
@@ -1517,6 +1519,7 @@
 						form
 								.addClass('success')
 								.removeClass('form-in-process');
+								
 
 						if (formHasCaptcha) {
 							grecaptcha.reset();
@@ -1528,18 +1531,21 @@
 						if (result === "MF000") {
 							if (output.hasClass("snackbars")) {
 								output.html('<p><span class="icon text-middle mdi mdi-check icon-xxs"></span><span>' + msg[result] + '</span></p>');
+								
 							} else {
 								output.addClass("active success");
-							}
+						}
 						} else {
 							if (output.hasClass("snackbars")) {
 								output.html(' <p class="snackbars-left"><span class="icon icon-xxs mdi mdi-alert-outline text-middle"></span><span>' + msg[result] + '</span></p>');
+								
 							} else {
 								output.addClass("active error");
 							}
 						}
 
 						form.clearForm();
+						
 
 						if (select.length) {
 							select.select2("val", "");
@@ -1551,11 +1557,12 @@
 							output.removeClass("active error success");
 							form.removeClass('success');
 						}, 3500);
+						
+						
 					}
 				});
 			}
 		}
-
 		/**
 		 * Select2
 		 * @description Enables select2 plugin

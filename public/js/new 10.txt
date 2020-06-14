@@ -1,0 +1,51 @@
+            <h2 class="text-uppercase text-center">Nos services</h2>
+            <div class="row justify-content-center">
+                
+
+
+                <div class="col-lg-4 col-md-8 col-sm-10">
+                    <div class="col-12">
+                        <img src="/images/services-1.jpg" alt="">
+                        <div class="row">
+                            <div class="col-3">
+                                <ion-icon name="server-outline" class="service-icon"></ion-icon>
+                            </div>
+                            <div class="col-9 pt-3">
+                                <h4>Récupération de données</h4>
+                                <p>Vous aider à restaurer vos données</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-4 col-md-8 col-sm-10">
+                    <div class="col-12">
+                        <img src="/images/services-6.jpg" alt="">
+                        <div class="row">
+                            <div class="col-3">
+                                <ion-icon name="git-network-outline" class="service-icon"></ion-icon>
+                            </div>
+                            <div class="col-9 pt-3">
+                                <h4>Support réseau</h4>
+                                <p>Dépannage à distance 24/7 via le Web</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-4 col-md-8 col-sm-10">
+                    <div class="col-12">
+                        <img src="/images/services-3.jpg" alt="">
+                        <div class="row">
+                            <div class="col-3">
+                                <ion-icon name="bug-outline" class="service-icon"></ion-icon>
+                            </div>
+                            <div class="col-9 pt-3">
+                                <h4>Suppression de virus</h4>
+                                <p>Supprimez tout virus avec notre aide</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            
+            </div>

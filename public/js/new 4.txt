@@ -1,0 +1,63 @@
+    <vehicle id="15" modName="FS19_Crazy_Balefork_gamemods_channel_ModLandNet" filename="$moddir$FS19_Crazy_Balefork_gamemods_channel_ModLandNet/telehandler_quader.xml" isAbsolute="true" age="1.000000" price="1200.000000" farmId="3" propertyState="1" operatingTime="16928.023438">
+        <component1 position="268.3136 93.1970 -158.2007" rotation="178.9074 8.6791 -179.9960"/>
+        <configuration name="fillUnit" id="1"/>
+        <configuration name="baseMaterial" id="1"/>
+        <boughtConfiguration name="fillUnit" id="1"/>
+        <boughtConfiguration name="baseMaterial" id="1"/>
+        <washable>
+            <dirtNode amount="0.950684"/>
+        </washable>
+        <wearable>
+            <wearNode amount="0.178253"/>
+        </wearable>
+        <attacherJoints comboDirection="-1"/>
+        <foldable foldAnimTime="1.000000"/>
+        <baleLoader isInWorkPosition="true">
+            <bale isConnectedToInline="false" filename="$data/objects/squarebales/baleHay240.i3d" position="-0.6020 -1.4400 -2.8860" rotation="0.0000 90.0000 0.0000" valueScale="1.000000" fillLevel="4000.000000" farmId="3" balePlace="1"/>
+            <bale isConnectedToInline="false" filename="$data/objects/squarebales/baleHay240.i3d" position="-0.6020 -0.6479 -2.8860" rotation="0.0000 90.0000 0.0000" valueScale="1.000000" fillLevel="4000.000000" farmId="3" balePlace="1"/>
+            <bale isConnectedToInline="false" filename="$data/objects/squarebales/baleHay240.i3d" position="-0.6020 0.1516 -2.8862" rotation="0.0000 90.0000 0.0000" valueScale="1.000000" fillLevel="4000.000000" farmId="3" balePlace="1"/>
+            <bale isConnectedToInline="false" filename="$data/objects/squarebales/baleHay240.i3d" position="-0.6020 0.9540 -2.8862" rotation="0.0000 90.0000 0.0000" valueScale="1.000000" fillLevel="4000.000000" farmId="3" balePlace="1"/>
+            <bale isConnectedToInline="false" filename="$data/objects/squarebales/baleHay240.i3d" position="-0.6020 1.7634 -2.8862" rotation="0.0000 90.0000 0.0000" valueScale="1.000000" fillLevel="4000.000000" farmId="3" balePlace="1"/>
+            <bale isConnectedToInline="false" filename="$data/objects/squarebales/baleHay240.i3d" position="-0.6020 -1.4400 -1.6690" rotation="0.0000 90.0000 0.0000" valueScale="1.000000" fillLevel="4000.000000" farmId="3" balePlace="1"/>
+            <bale isConnectedToInline="false" filename="$data/objects/squarebales/baleHay240.i3d" position="-0.6020 -0.6479 -1.6690" rotation="0.0000 90.0000 0.0000" valueScale="1.000000" fillLevel="4000.000000" farmId="3" balePlace="1"/>
+            <bale isConnectedToInline="false" filename="$data/objects/squarebales/baleHay240.i3d" position="-0.6020 0.1516 -1.6690" rotation="0.0000 90.0000 0.0000" valueScale="1.000000" fillLevel="4000.000000" farmId="3" balePlace="1"/>
+            <bale isConnectedToInline="false" filename="$data/objects/squarebales/baleHay240.i3d" position="-0.6020 0.9540 -1.6690" rotation="0.0000 90.0000 0.0000" valueScale="1.000000" fillLevel="4000.000000" farmId="3" balePlace="1"/>
+            <bale isConnectedToInline="false" filename="$data/objects/squarebales/baleHay240.i3d" position="-0.6020 1.7634 -1.6690" rotation="0.0000 90.0000 0.0000" valueScale="1.000000" fillLevel="4000.000000" farmId="3" balePlace="1"/>
+        </baleLoader>
+        <fillUnit>
+            <unit index="1" fillType="SQUAREBALE" fillLevel="10.000000"/>
+        </fillUnit>
+        <realDirtColor>
+            <body r="0.199999" g="0.139999" b="0.079999" curIndex="0" prevIndex="0"/>
+        </realDirtColor>
+    </vehicle>
+    <vehicle id="26" modName="pdlc_andersonPack" filename="$pdlcdir$andersonPack/andersonGroup/stackPro7200/stackPro7200.xml" isAbsolute="true" age="1.000000" price="89000.000000" farmId="2" propertyState="1" operatingTime="0.000000">
+        <component1 position="166.7643 109.6509 513.6299" rotation="0.0108 -0.0033 -0.0429"/>
+        <configuration name="fillUnit" id="1"/>
+        <configuration name="wheel" id="1"/>
+        <boughtConfiguration name="fillUnit" id="1"/>
+        <boughtConfiguration name="wheel" id="1"/>
+        <washable>
+            <dirtNode amount="0.000056"/>
+            <dirtNode amount="0.000056"/>
+            <dirtNode amount="0.000056"/>
+            <dirtNode amount="0.000056"/>
+            <dirtNode amount="0.000056"/>
+        </washable>
+        <wearable>
+            <wearNode amount="0.000010"/>
+        </wearable>
+        <attacherJoints comboDirection="-1"/>
+        <foldable foldAnimTime="1.000000"/>
+        <fillUnit>
+            <unit index="1" fillType="UNKNOWN" fillLevel="0.000000"/>
+        </fillUnit>
+        <baleLoader isInWorkPosition="false"/>
+        <realDirtColor>
+            <body r="0.200000" g="0.140000" b="0.080000" curIndex="0" prevIndex="0"/>
+            <wheel1 r="0.200000" g="0.140000" b="0.080000" curIndex="0" prevIndex="0"/>
+            <wheel2 r="0.200000" g="0.140000" b="0.080000" curIndex="0" prevIndex="0"/>
+            <wheel3 r="0.200000" g="0.140000" b="0.080000" curIndex="0" prevIndex="0"/>
+            <wheel4 r="0.200000" g="0.140000" b="0.080000" curIndex="0" prevIndex="0"/>
+        </realDirtColor>
+    </vehicle>

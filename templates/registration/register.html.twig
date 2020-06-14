@@ -37,8 +37,7 @@
                     </div>
                     <div class="text-decoration-lines"><span class="text-decoration-lines__content">Ou</span></div>
                     <!-- RD Mailform-->
-                    {{ form_start(registrationForm, { 'attr': {'class': 'rd-mailform2 rd-mailform_label-centered'} }) }}
-                        <div class="pt-3"></div>
+                    {{ form_start(registrationForm, { 'attr': {'class': 'rd-mailform rd-mailform_label-centered', 'data-form-output': 'form-output-global'} }) }}
                         <div class="form-wrap">
                             {{ form_label(registrationForm.email, 'E-mail', {'label_attr': {'class': 'form-label-outside'} }) }}
                             <div class="form-errors pb-1">
@@ -67,7 +66,7 @@
                                 </div>
                                 
                                 {{ form_widget(registrationForm.agreeTerms) }}
-                                {{ form_label(registrationForm.agreeTerms, 'Accepter les conditions générales') }}
+                                {{ form_label(registrationForm.agreeTerms, 'J\'accepte les conditions générales') }}
                             </label>
                         </div>
                         <div class="row row-20 form-wrap">

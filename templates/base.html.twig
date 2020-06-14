@@ -14,7 +14,7 @@
         <link rel="stylesheet" href="/css/style.css">
         {% block stylesheets %}{% endblock %}
     </head>
-    <body>
+    <body id="resultat">
         <div id="page-loader">
         <div class="page-loader-body"><img src="/images/logo-default-130x42.png" alt="" width="130" height="42"/>
             <div class="cssload-wrapper">
@@ -27,7 +27,7 @@
         </div>
         </div>
         <div class="page">
-            <header class="section page-header">
+        <header class="section page-header">
                 <!-- RD Navbar-->
                 <div class="rd-navbar-wrap">
                     <nav class="rd-navbar rd-navbar-classic" data-layout="rd-navbar-fixed" data-sm-layout="rd-navbar-fixed" data-sm-device-layout="rd-navbar-fixed" data-md-layout="rd-navbar-fixed" data-md-device-layout="rd-navbar-fixed" data-lg-device-layout="rd-navbar-fixed" data-lg-layout="rd-navbar-static" data-xl-device-layout="rd-navbar-static" data-xl-layout="rd-navbar-static" data-stick-up-clone="false" data-md-stick-up-offset="74px" data-lg-stick-up-offset="66px" data-md-stick-up="true" data-lg-stick-up="true"> 
@@ -110,7 +110,8 @@
                         </div>
                     </nav>
                 </div>
-            </header>
+        </header>
+
         {% block body %}{% endblock %}
 
             <!-- Page Footer-->

@@ -1,0 +1,20 @@
+if ($isPasswordCorrect) {
+        session_start();
+        $_SESSION['id'] = $resultat['id'];
+        $_SESSION['pseudo'] = $_POST['pseudo'];
+        echo 'Vous êtes connecté !';
+    }
+	
+	
+if (isset($_POST['pseudo']) AND isset($isPasswordCorrect) AND isset($_POST['connexion_automatique']) AND $_POST['connexion_automatique'] == 'on')
+    {
+        setcookie('pseudo', $_POST['pseudo'], time() + 365*24*3600, null, null, false, true);
+        $cookie_name = "ticket";
+        // On génère quelque chose d'aléatoire
+        $ticket = session_id().microtime().rand(0,9999999999);
+        // on hash pour avoir quelque chose de propre qui aura toujours la même forme
+        $ticket = hash('sha512', $ticket);
+        // On enregistre des deux cotés
+        setcookie($cookie_name, $ticket, time() + (60 * 20)); // Expire au bout de 20 min
+        $_SESSION['ticket'] = $ticket;
+    }
