@@ -3,5 +3,15 @@
 {% block title %}Hello ClientsController!{% endblock %}
 
 {% block body %}
+{% for flashError in app.flashes('verify_email_error') %}
+        <div class="alert alert-danger" role="alert">{{ flashError|trans }}</div>
+{% endfor %}
+{% for label, messages in app.flashes %}
+    <div class="alert alert-{{ label }}">
+        {% for message in messages %}
+            <p>{{ message|trans|raw }}</p>    
+        {% endfor %}
+    </div>
+{% endfor %}
 <h1>Bienvenu sur votre compte client</h1>
 {% endblock %}

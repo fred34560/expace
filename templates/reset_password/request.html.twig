@@ -29,7 +29,7 @@
                     <!-- RD Mailform-->
                     {{ form_start(requestForm, { 'attr': {'class': 'rd-mailform rd-mailform_label-centered', 'data-form-output': 'form-output-global'} }) }}
                         {% for flashError in app.flashes('reset_password_error') %}
-                            <div class="alert alert-danger" role="alert">{{ flashError }}</div>
+                            <div class="alert alert-danger" role="alert">{{ flashError|trans }}</div>
                         {% endfor %}
                         <div class="form-wrap">
                             {{ form_label(requestForm.email, 'E-mail', {'label_attr': {'class': 'form-label-outside'} }) }}

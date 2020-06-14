@@ -16,15 +16,15 @@
     </head>
     <body id="resultat">
         <div id="page-loader">
-        <div class="page-loader-body"><img src="/images/logo-default-130x42.png" alt="" width="130" height="42"/>
-            <div class="cssload-wrapper">
-            <div class="cssload-border">
-                <div class="cssload-whitespace">
-                <div class="cssload-line"></div>
+            <div class="page-loader-body"><img src="/images/logo-default-130x42.png" alt="" width="130" height="42"/>
+                <div class="cssload-wrapper">
+                <div class="cssload-border">
+                    <div class="cssload-whitespace">
+                    <div class="cssload-line"></div>
+                    </div>
+                </div>
                 </div>
             </div>
-            </div>
-        </div>
         </div>
         <div class="page">
         <header class="section page-header">
@@ -79,12 +79,22 @@
                                                 </ul>
                                             </div>
                                         </div>
-                                        <div class="rd-navbar-panel__button">
-                                            <a class="button button-xs button-icon button-icon-left button-default button-ujarak" href="login.html">
-                                                <span class="icon mdi mdi-account"></span>
-                                                Login
-                                            </a>
-                                        </div>
+                                        {% if app.user %}
+                                            <div class="rd-navbar-panel__button">
+                                                <a class="button button-xs button-icon button-icon-left button-default button-ujarak" href="{{ path('app_logout') }}">
+                                                    <span class="icon mdi mdi-account"></span>
+                                                    Déconnection
+                                                </a>
+                                            </div>
+                                        {% else %}
+                                            <div class="rd-navbar-panel__button">
+                                                <a class="button button-xs button-icon button-icon-left button-default button-ujarak" href="{{ path('app_login') }}">
+                                                    <span class="icon mdi mdi-account"></span>
+                                                    Se connecter
+                                                </a>
+                                            </div>
+                                        {% endif %}
+                                        
                                     </div>
                                     <!-- RD Navbar Nav Wrap-->
                                     <div class="rd-navbar-nav-wrap">
