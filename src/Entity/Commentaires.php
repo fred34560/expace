@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\CommentairesRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -52,6 +54,21 @@ class Commentaires
      * @ORM\JoinColumn(nullable=false)
      */
     private $articles;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=Commentaires::class, inversedBy="commentaires")
+     */
+    private $parentId;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Commentaires::class, mappedBy="parentId")
+     */
+    private $commentaires;
+
+    public function __construct()
+    {
+        $this->commentaires = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -138,6 +155,49 @@ class Commentaires
     public function setArticles(?Articles $articles): self
     {
         $this->articles = $articles;
+
+        return $this;
+    }
+
+    public function getParentId(): ?self
+    {
+        return $this->parentId;
+    }
+
+    public function setParentId(?self $parentId): self
+    {
+        $this->parentId = $parentId;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|self[]
+     */
+    public function getCommentaires(): Collection
+    {
+        return $this->commentaires;
+    }
+
+    public function addCommentaire(self $commentaire): self
+    {
+        if (!$this->commentaires->contains($commentaire)) {
+            $this->commentaires[] = $commentaire;
+            $commentaire->setParentId($this);
+        }
+
+        return $this;
+    }
+
+    public function removeCommentaire(self $commentaire): self
+    {
+        if ($this->commentaires->contains($commentaire)) {
+            $this->commentaires->removeElement($commentaire);
+            // set the owning side to null (unless already changed)
+            if ($commentaire->getParentId() === $this) {
+                $commentaire->setParentId(null);
+            }
+        }
 
         return $this;
     }
