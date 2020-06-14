@@ -117,6 +117,12 @@
     "jms/metadata": {
         "version": "2.3.0"
     },
+    "knplabs/knp-components": {
+        "version": "v2.3.5"
+    },
+    "knplabs/knp-paginator-bundle": {
+        "version": "v5.2.0"
+    },
     "knpuniversity/oauth2-client-bundle": {
         "version": "1.20",
         "recipe": {
