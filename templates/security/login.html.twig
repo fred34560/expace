@@ -34,9 +34,17 @@
                         <div class="text-decoration-lines"><span class="text-decoration-lines__content">Ou</span></div>
                         <!-- RD Mailform-->
                         <form method="post" class="rd-mailform rd-mailform_label-centered" novalidate data-form-output="form-output-global">
+                            {% for label, messages in app.flashes %}
+                                <div class="alert alert-{{ label }}">
+                                    {% for message in messages %}
+                                        <p>{{ message | raw }}</p>    
+                                    {% endfor %}
+                                </div>
+                            {% endfor %}
                             {% if error %}
                                 <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
                             {% endif %}
+                            
                             <div class="form-wrap">
                                 <label class="form-label-outside" for="inputEmail">E-mail</label>
                                 <input value="{{ last_username }}" class="form-input" id="inputEmail" type="email" name="email" data-constraints="@Email @Required" required>
@@ -59,6 +67,9 @@
                                 <div class="col-md-6">
                                     <a href="{{ path('app_register') }}" class="button button-default-outline button-block button-ujarak">Créer un compte</a>
                                 </div>
+                            </div>
+                            <div class="breadcrumbs-custom__path text-center">
+                                <a href="{{ path('app_forgot_password_request') }}">Vous avez oublié votre mot de passe ?</a>
                             </div>
                         </form>
                     </div>

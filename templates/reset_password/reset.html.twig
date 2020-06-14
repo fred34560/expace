@@ -3,10 +3,82 @@
 {% block title %}Reset your password{% endblock %}
 
 {% block body %}
+    <!-- Breadcrumbs-->
+    <section class="breadcrumbs-custom">
+        <div class="breadcrumbs-custom__aside bg-image context-dark" style="background-image: url(images/bg-image-1-1920x238.jpg);">
+            <div class="container">
+                <h2 class="breadcrumbs-custom__title">Espace client</h2>
+            </div>
+        </div>
+        <div class="breadcrumbs-custom__main bg-gray-light">
+            <div class="container">
+                <ul class="breadcrumbs-custom__path">
+                    <li><a href="index.html">Accueil</a></li>
+                    <li class="active">Réinitialiser</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- Login Form-->
+    <section class="section section-md bg-white text-center">
+        <div class="container">
+            <div class="row justify-content-md-center">
+                <div class="col-md-10 col-lg-8 col-xl-6">
+                    <!-- RD Mailform-->
+                    {{ form_start(resetForm, { 'attr': {'class': 'rd-mailform rd-mailform_label-centered', 'data-form-output': 'form-output-global'} }) }}
+                        {% for flashError in app.flashes('reset_password_error') %}
+                            <div class="alert alert-danger" role="alert">{{ flashError }}</div>
+                        {% endfor %}
+                        <div class="form-wrap">
+                            {{ form_label(resetForm.plainPassword.first, 'Mot de passe', {'label_attr': {'class': 'form-label-outside'} }) }}
+                            <div class="form-errors pb-1">
+                                {{ form_errors(resetForm.plainPassword.first) }}
+                            </div>
+                            {{ form_widget(resetForm.plainPassword.first, { 'attr': {'class': 'form-input', 'data-constraints': '@Required'} }) }}
+                        </div>
+                        <div class="form-wrap">
+                            {{ form_label(resetForm.plainPassword.second, 'Confirmation', {'label_attr': {'class': 'form-label-outside'} }) }}
+                            <div class="form-errors pb-1">
+                                {{ form_errors(resetForm.plainPassword.second) }}
+                            </div>
+                            {{ form_widget(resetForm.plainPassword.second, { 'attr': {'class': 'form-input', 'data-constraints': '@Required'} }) }}
+                        </div>
+                        <div class="row row-20 form-wrap">
+                            <div class="col-12">
+                                <button class="button button-primary button-block button-ujarak" type="submit">Valider les changements</button>
+                            </div>
+                        </div>
+                    {{ form_end(resetForm) }}
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--
+
     <h1>Reset your password</h1>
 
     {{ form_start(resetForm) }}
         {{ form_row(resetForm.plainPassword) }}
         <button class="btn btn-primary">Reset password</button>
     {{ form_end(resetForm) }}
+    -->
 {% endblock %}

@@ -3,20 +3,49 @@
 {% block title %}Reset your password{% endblock %}
 
 {% block body %}
-    {% for flashError in app.flashes('reset_password_error') %}
-        <div class="alert alert-danger" role="alert">{{ flashError }}</div>
-    {% endfor %}
-    <h1>Reset your password</h1>
-
-    {{ form_start(requestForm) }}
-        {{ form_row(requestForm.email) }}
-        <div>
-            <small>
-                Enter your email address and we we will send you a
-                link to reset your password.
-            </small>
+    <!-- Breadcrumbs-->
+    <section class="breadcrumbs-custom">
+        <div class="breadcrumbs-custom__aside bg-image context-dark" style="background-image: url(images/bg-image-1-1920x238.jpg);">
+            <div class="container">
+                <h2 class="breadcrumbs-custom__title">Espace client</h2>
+            </div>
         </div>
+        <div class="breadcrumbs-custom__main bg-gray-light">
+            <div class="container">
+                <ul class="breadcrumbs-custom__path">
+                    <li><a href="index.html">Accueil</a></li>
+                    <li class="active">Réinitialiser</li>
+                </ul>
+            </div>
+        </div>
+    </section>
 
-        <button class="btn btn-primary">Send password reset email</button>
-    {{ form_end(requestForm) }}
+
+    <!-- Login Form-->
+    <section class="section section-md bg-white text-center">
+        <div class="container">
+            <div class="row justify-content-md-center">
+                <div class="col-md-10 col-lg-8 col-xl-6">
+                    <!-- RD Mailform-->
+                    {{ form_start(requestForm, { 'attr': {'class': 'rd-mailform rd-mailform_label-centered', 'data-form-output': 'form-output-global'} }) }}
+                        {% for flashError in app.flashes('reset_password_error') %}
+                            <div class="alert alert-danger" role="alert">{{ flashError }}</div>
+                        {% endfor %}
+                        <div class="form-wrap">
+                            {{ form_label(requestForm.email, 'E-mail', {'label_attr': {'class': 'form-label-outside'} }) }}
+                            <div class="form-errors pb-1">
+                                {{ form_errors(requestForm.email) }}
+                            </div>
+                            {{ form_widget(requestForm.email, { 'attr': {'class': 'form-input', 'data-constraints': '@Email @Required'} }) }}
+                        </div>
+                        <div class="row row-20 form-wrap">
+                            <div class="col-12">
+                                <button class="button button-primary button-block button-ujarak" type="submit">Se connecter</button>
+                            </div>
+                        </div>
+                    {{ form_end(requestForm) }}
+                </div>
+            </div>
+        </div>
+    </section>
 {% endblock %}
