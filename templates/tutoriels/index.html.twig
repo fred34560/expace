@@ -1,8 +1,10 @@
+
 {% extends 'base.html.twig' %}
 
 {% block title %}Tutoriels{% endblock %}
 
 {% block body %}
+
     <!-- Breadcrumbs-->
     <section class="breadcrumbs-custom">
         <div class="breadcrumbs-custom__aside bg-image context-dark" style="background-image: url(images/bg-image-1-1920x238.jpg);">
@@ -29,47 +31,39 @@
         <div class="container">
             <article class="blog-layout">
                 <div class="blog-layout__main">
-                    <!-- Post Classic-->
-                    <article class="post-classic">
-                        <h3 class="post-classic__title"><a href="blog-post.html">Benefits of Async/Await in Programming</a></h3>
-                        <ul class="post-classic__meta">
-                            <li>
-                                <span class="icon mdi mdi-calendar-blank"></span>
-                                <a href="blog-post.html">
-                                    <time datetime="2018">May 12, 2018</time>
+                    {% for article in pagination %}
+                        <!-- Post Classic-->
+                        <article class="post-classic">
+                            <h3 class="post-classic__title"><a href="blog-post.html">{{ article.titre }}</a></h3>
+                            <ul class="post-classic__meta">
+                                <li>
+                                    <span class="icon mdi mdi-calendar-blank"></span>
+                                    <a href="blog-post.html">
+                                        <time datetime="2018">{{ article.createdAt|format_datetime('medium', 'none', locale='fr') }}</time>
+                                    </a>
+                                </li>
+                                <li>
+                                    <span class="icon mdi mdi-comment-outline"></span>
+                                    <a href="blog-post.html">
+                                    {{ article.commentaires|length }} commentaires
+                                    </a>
+                                </li>
+                                <li>
+                                    <span class="icon mdi mdi-account"></span>
+                                    <span>by</span>
+                                    <a href="#">
+                                        {{ article.users.email }}
+                                    </a>
+                                </li>
+                            </ul>
+                            <div class="post-classic__media">
+                                <a class="post-classic__figure" href="blog-post.html">
+                                    <img class="post-classic__image" src="{{ article.featuredImage }}" alt="" width="715" height="417"/>
                                 </a>
-                            </li>
-                            <li>
-                                <span class="icon mdi mdi-comment-outline"></span>
-                                <a href="blog-post.html">
-                                    3 comments
-                                </a>
-                            </li>
-                            <li>
-                                <span class="icon mdi mdi-account"></span>
-                                <span>by</span>
-                                <a href="#">
-                                    John Doe
-                                </a>
-                            </li>
-                        </ul>
-                        <div class="post-classic__media">
-                            <a class="post-classic__figure" href="blog-post.html">
-                                <img class="post-classic__image" src="images/blog-post-1-715x417.jpg" alt="" width="715" height="417"/>
-                            </a>
-                        </div>
-                    </article>
-                    <div class="pagination">
-                        <div class="pagination__control">
-                            <a href="#">Older posts</a>
-                        </div>
-                        <ul class="pagination__list">
-                            <li><a href="#">1</a></li>
-                            <li class="active"><a href="#">2</a></li>
-                            <li><a href="#">3</a></li>
-                        </ul>
-                        <div class="pagination__control"><a href="#">Newer posts</a></div>
-                    </div>
+                            </div>
+                        </article>    
+                    {% endfor %}
+                    {{ knp_pagination_render(pagination) }}
                 </div>
                 <div class="blog-layout__aside">
                     <div class="blog-layout__aside-item">
@@ -85,7 +79,13 @@
                     <div class="blog-layout__aside-item blog-layout__aside-item_bordered">
                         <p class="custom-heading-line heading-8">Categories</p>
                         <ul class="list-categories">
-                            <li class="active"><a href="#">All categories</a><span class="count">64</span></li>
+                            <li class="active"><a href="#">Toutes catégories</a><span class="count">64</span></li>
+                            
+                            {% for categorie in articles.categories %}
+                            
+                            {{ categorie.nom }}
+                                
+                            {% endfor %}
                             <li> <a href="#">Software</a><span class="count">23</span></li>
                             <li><a href="#">Development</a><span class="count">10</span></li>
                             <li><a href="#">Programming</a><span class="count">10</span></li>
