@@ -46,7 +46,8 @@ class AppFixtures extends Fixture
             $user->setEmail($faker->email)
                  ->setPassword($hash)
                  ->setIsVerified(1)
-                 ->setAvatar($picture);
+                 ->setAvatar($picture)
+                 ->setPseudo($faker->userName);
         
         $manager->persist($user);
         $users[] = $user;        
@@ -77,11 +78,13 @@ class AppFixtures extends Fixture
             $image = $faker->imageUrl(715,417);
 
             $user = $users[mt_rand(0, count($users) -1)];
+            $categorie = $categories[mt_rand(0, count($categories) -1)];
 
             $article->setUsers($user)
                     ->setTitre($titre)
                     ->setContenu($contenu)
-                    ->setFeaturedImage($image);
+                    ->setFeaturedImage($image)
+                    ->setCategories($categorie);
 
             $manager->persist($article);
             $articles[] = $article;

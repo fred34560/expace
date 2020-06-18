@@ -43,6 +43,13 @@
                             {{ form_widget(registrationForm.email, { 'attr': {'class': 'form-input', 'data-constraints': '@Email @Required'} }) }}
                         </div>
                         <div class="form-wrap">
+                            {{ form_label(registrationForm.username, 'Pseudo', {'label_attr': {'class': 'form-label-outside'} }) }}
+                            <div class="form-errors pb-1">
+                                {{ form_errors(registrationForm.username) }}
+                            </div>
+                            {{ form_widget(registrationForm.username, { 'attr': {'class': 'form-input', 'data-constraints': '@Required'} }) }}
+                        </div>
+                        <div class="form-wrap">
                             {{ form_label(registrationForm.plainPassword.first, 'Mot de passe', {'label_attr': {'class': 'form-label-outside'} }) }}
                             <div class="form-errors pb-1">
                                 {{ form_errors(registrationForm.plainPassword.first) }}

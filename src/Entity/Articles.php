@@ -2,16 +2,18 @@
 
 namespace App\Entity;
 
-use App\Repository\ArticlesRepository;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Component\HttpFoundation\File\File;
-use Vich\UploaderBundle\Mapping\Annotation as Vich;
+use App\Repository\ArticlesRepository;
 use Gedmo\Mapping\Annotation as Gedmo;
+use Doctrine\Common\Collections\Collection;
+use Symfony\Component\HttpFoundation\File\File;
+use Doctrine\Common\Collections\ArrayCollection;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
+use Vich\UploaderBundle\Mapping\Annotation\UploadableField;
 
 /**
  * @ORM\Entity(repositoryClass=ArticlesRepository::class)
+ * @Vich\Uploadable
  */
 class Articles
 {
@@ -72,18 +74,18 @@ class Articles
     private $users;
 
     /**
-     * @ORM\ManyToMany(targetEntity=Categories::class, mappedBy="articles")
-     */
-    private $categories;
-
-    /**
      * @ORM\OneToMany(targetEntity=Commentaires::class, mappedBy="articles", orphanRemoval=true)
      */
     private $commentaires;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=Categories::class, inversedBy="articles")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $categories;
+
     public function __construct()
     {
-        $this->categories = new ArrayCollection();
         $this->commentaires = new ArrayCollection();
     }
 
@@ -136,16 +138,14 @@ class Articles
         return $this->updatedAt;
     }
 
-    public function setImageFile(File $image = null)
+    public function setImageFile(?File $imageFile = null): void
     {
-        $this->imageFile = $image;
+        $this->imageFile = $imageFile;
 
-        // VERY IMPORTANT:
-        // It is required that at least one field changes if you are using Doctrine,
-        // otherwise the event listeners won't be called and the file is lost
-        if ($image) {
-            // if 'updatedAt' is not defined in your entity, use another property
-            $this->updated_at = new \DateTime('now');
+        if (null !== $imageFile) {
+            // It is required that at least one field changes if you are using doctrine
+            // otherwise the event listeners won't be called and the file is lost
+            $this->updatedAt = new \DateTimeImmutable();
         }
     }
 
@@ -179,34 +179,6 @@ class Articles
     }
 
     /**
-     * @return Collection|Categories[]
-     */
-    public function getCategories(): Collection
-    {
-        return $this->categories;
-    }
-
-    public function addCategory(Categories $category): self
-    {
-        if (!$this->categories->contains($category)) {
-            $this->categories[] = $category;
-            $category->addArticle($this);
-        }
-
-        return $this;
-    }
-
-    public function removeCategory(Categories $category): self
-    {
-        if ($this->categories->contains($category)) {
-            $this->categories->removeElement($category);
-            $category->removeArticle($this);
-        }
-
-        return $this;
-    }
-
-    /**
      * @return Collection|Commentaires[]
      */
     public function getCommentaires(): Collection
@@ -233,6 +205,18 @@ class Articles
                 $commentaire->setArticles(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getCategories(): ?Categories
+    {
+        return $this->categories;
+    }
+
+    public function setCategories(?Categories $categories): self
+    {
+        $this->categories = $categories;
 
         return $this;
     }

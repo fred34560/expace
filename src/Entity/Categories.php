@@ -32,9 +32,9 @@ class Categories
     private $slug;
 
     /**
-     * @ORM\ManyToMany(targetEntity=Articles::class, inversedBy="categories")
+     * @ORM\OneToMany(targetEntity=Articles::class, mappedBy="categories")
      */
-    private $articles = false;
+    private $articles;
 
     public function __construct()
     {
@@ -80,6 +80,7 @@ class Categories
     {
         if (!$this->articles->contains($article)) {
             $this->articles[] = $article;
+            $article->setCategories($this);
         }
 
         return $this;
@@ -89,8 +90,13 @@ class Categories
     {
         if ($this->articles->contains($article)) {
             $this->articles->removeElement($article);
+            // set the owning side to null (unless already changed)
+            if ($article->getCategories() === $this) {
+                $article->setCategories(null);
+            }
         }
 
         return $this;
     }
+
 }
