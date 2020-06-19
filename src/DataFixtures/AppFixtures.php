@@ -105,7 +105,8 @@ class AppFixtures extends Fixture
                             ->setContenu($content)
                             ->setActif(true)
                             ->setRgpd(true)
-                            ->setCreatedAt($faker->dateTime('now'));
+                            ->setCreatedAt($faker->dateTime('now'))
+                            ->setUsers($user);
 
                 $manager->persist($commentaire);
                 $commentaires[] = $commentaire;
@@ -127,7 +128,8 @@ class AppFixtures extends Fixture
                                 ->setActif(true)
                                 ->setRgpd(true)
                                 ->setCreatedAt($faker->dateTime('now'))
-                                ->setParentId($id);
+                                ->setParentId($id)
+                                ->setUsers($user);
     
                     $manager->persist($commentaire);
     

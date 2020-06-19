@@ -62,7 +62,7 @@ class BlogController extends AbstractController
         $categories = $this->getDoctrine()->getRepository(Categories::class)->findAll();
 
         $totalArticles = $this->getDoctrine()->getRepository(Articles::class)->getNb();
-        $derniersPosts = $this->getDoctrine()->getRepository(Articles::class)->getDerniersPosts();
+        $derniersPosts = $this->getDoctrine()->getRepository(Articles::class)->getDerniersPosts(3);
 
         //dd($totalArticles);
 

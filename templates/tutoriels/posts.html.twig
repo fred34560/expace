@@ -77,48 +77,88 @@
                     <div class="section-md section-collapse">
                             <p class="custom-heading-line heading-8">Commentaires</p>
                             {% for commentaire in article.commentaires %}
-                                                        <div class="comment-group">
-                                <!-- Comment-->
-                                <article class="comment">
-                                    <div class="comment__figure"><img class="comment__image" src="/images/user-1-82x82.jpg" alt="" width="82" height="82"/>
-                                    </div>
-                                    <div class="comment__main">
-                                        <div class="comment__header">
-                                            <h5 class="comment__title">Samantha</h5><span class="comment__time">3 days ago</span>
-                                        </div>
-                                        <div class="comment__text">
-                                            <p>Porta non pulvinar neque laoreet suspendisse interdum consectetur. Facilisis leo vel fringilla est ullamcorper eget nulla facilisi. Massa eget egestas purus viverra accumsan in nisl. Egestas sed tempus urna et pharetra. Tempus egestas sed sed risus pretium quam vulputate.</p>
-                                        </div>
-                                        <div class="comment__footer">
-                                            <ul class="comment__list">
-                                                <li> <a class="comment__link" href="#"> <span class="icon mdi mdi-thumb-up-outline"> </span><span>12</span></a></li>
-                                                <li><a class="comment__link" href="#"><span class="icon mdi mdi-comment-outline"></span><span>Reply</span></a></li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                </article>
                                 <div class="comment-group">
                                     <!-- Comment-->
                                     <article class="comment">
-                                        <div class="comment__figure"><img class="comment__image" src="/images/user-2-82x82.jpg" alt="" width="82" height="82"/>
+                                        <div class="comment__figure"><img class="comment__image" src="{{commentaire.users.avatar}}" alt="" width="82" height="82"/>
                                         </div>
                                         <div class="comment__main">
                                             <div class="comment__header">
-                                                <h5 class="comment__title">Edward</h5><span class="comment__time">1 day ago</span>
+                                                {% set difference = date( "now" | date() ).diff(date(commentaire.createdAt)) %}
+                                                {% set leftDays = difference.days %}
+                                                {% set leftHours = difference.h %}
+                                                {% set leftYears = difference.y %}
+                                                {% set leftMinutes = difference.i %}
+                                                {% set leftSeconds = difference.s %}
+                                                
+                                                {% if leftYears > 0 %}
+                                                {% set difference = leftYears ~ " an(s)" %} 
+                                                {% elseif leftDays > 0 %}
+                                                {% set difference = leftDays ~ " jour(s)" %}
+                                                {% elseif leftHours > 0 %}
+                                                {% set difference = leftHours ~ " heure(s)" %} 
+                                                {% elseif leftMinutes > 0 %}
+                                                {% set difference = leftMinutes ~ " minute(s)" %} 
+                                                {% elseif leftSeconds > 0 %}
+                                                {% set difference = leftSeconds ~ " seconde(s)" %} 
+                                                {% endif %}
+                                                
+                                                
+                                                <h5 class="comment__title">{{ commentaire.users.pseudo }}</h5><span class="comment__time">Il y a {{ difference }}</span>
                                             </div>
                                             <div class="comment__text">
-                                                <p>Lorem mollis aliquam ut porttitor. Placerat in egestas erat imperdiet sed euismod nisi porta. Sit amet luctus venenatis lectus magna.</p>
+                                                <p>{{ commentaire.contenu|raw }}</p>
                                             </div>
                                             <div class="comment__footer">
                                                 <ul class="comment__list">
-                                                    <li> <a class="comment__link" href="#"> <span class="icon mdi mdi-thumb-up-outline"> </span><span>53</span></a></li>
+                                                    <li> <a class="comment__link" href="#"> <span class="icon mdi mdi-thumb-up-outline"> </span><span>12</span></a></li>
                                                     <li><a class="comment__link" href="#"><span class="icon mdi mdi-comment-outline"></span><span>Reply</span></a></li>
                                                 </ul>
                                             </div>
                                         </div>
                                     </article>
+                                    {% for reponse in commentaire.commentaires %}
+                                    <div class="comment-group">
+                                        <!-- Comment-->
+                                        <article class="comment">
+                                            <div class="comment__figure"><img class="comment__image" src="{{ reponse.users.avatar }}" alt="" width="82" height="82"/>
+                                            </div>
+                                            <div class="comment__main">
+                                                <div class="comment__header">
+                                                {% set difference = date( "now" | date() ).diff(date(reponse.createdAt)) %}
+                                                {% set leftDays = difference.days %}
+                                                {% set leftHours = difference.h %}
+                                                {% set leftYears = difference.y %}
+                                                {% set leftMinutes = difference.i %}
+                                                {% set leftSeconds = difference.s %}
+                                                
+                                                {% if leftYears > 0 %}
+                                                {% set difference = leftYears ~ " an(s)" %} 
+                                                {% elseif leftDays > 0 %}
+                                                {% set difference = leftDays ~ " jour(s)" %}
+                                                {% elseif leftHours > 0 %}
+                                                {% set difference = leftHours ~ " heure(s)" %} 
+                                                {% elseif leftMinutes > 0 %}
+                                                {% set difference = leftMinutes ~ " minute(s)" %} 
+                                                {% elseif leftSeconds > 0 %}
+                                                {% set difference = leftSeconds ~ " seconde(s)" %} 
+                                                {% endif %}
+                                                    <h5 class="comment__title">{{ reponse.users.pseudo }}</h5><span class="comment__time">Il y a {{ difference }}</span>
+                                                </div>
+                                                <div class="comment__text">
+                                                    <p>{{ reponse.contenu|raw }}</p>
+                                                </div>
+                                                <div class="comment__footer">
+                                                    <ul class="comment__list">
+                                                        <li> <a class="comment__link" href="#"> <span class="icon mdi mdi-thumb-up-outline"> </span><span>53</span></a></li>
+                                                        <li><a class="comment__link" href="#"><span class="icon mdi mdi-comment-outline"></span><span>Reply</span></a></li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </article>
+                                    </div>    
+                                    {% endfor %}
                                 </div>
-                            </div>
     
                             {% endfor %}
                             <div class="comment-box">

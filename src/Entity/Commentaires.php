@@ -65,6 +65,12 @@ class Commentaires
      */
     private $commentaires;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=Users::class, inversedBy="commentaires")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $users;
+
     public function __construct()
     {
         $this->commentaires = new ArrayCollection();
@@ -198,6 +204,18 @@ class Commentaires
                 $commentaire->setParentId(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getUsers(): ?Users
+    {
+        return $this->users;
+    }
+
+    public function setUsers(?Users $users): self
+    {
+        $this->users = $users;
 
         return $this;
     }
