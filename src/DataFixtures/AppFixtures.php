@@ -5,6 +5,8 @@ namespace App\DataFixtures;
 use App\Entity\Articles;
 use App\Entity\Categories;
 use App\Entity\Commentaires;
+use App\Entity\CommentLike;
+use App\Entity\PostLike;
 use App\Entity\Users;
 use Faker\Factory;
 use Doctrine\Bundle\FixturesBundle\Fixture;
@@ -132,8 +134,25 @@ class AppFixtures extends Fixture
                                 ->setUsers($user);
     
                     $manager->persist($commentaire);
-    
+
+                    for ($l = 1; $l <= mt_rand(0, 10); $l++) { 
+                        $postLike = new PostLike();
+                        $postLike->setArticle($article)
+                             ->setUser($faker->randomElement($users));
+
+                        $manager->persist($postLike);
+
                     
+
+                    }
+    
+                    for ($m = 1; $m <= mt_rand(0, 10); $m++) {
+                        $commentLike = new CommentLike();
+                        $commentLike->setCommentaire($commentaire)
+                                    ->setUser($faker->randomElement($users));
+
+                        $manager->persist($commentLike);
+                    }
     
     
                 

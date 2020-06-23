@@ -71,9 +71,15 @@ class Commentaires
      */
     private $users;
 
+    /**
+     * @ORM\OneToMany(targetEntity=CommentLike::class, mappedBy="commentaire")
+     */
+    private $commentLikes;
+
     public function __construct()
     {
         $this->commentaires = new ArrayCollection();
+        $this->commentLikes = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -219,4 +225,44 @@ class Commentaires
 
         return $this;
     }
+
+    /**
+     * @return Collection|CommentLike[]
+     */
+    public function getCommentLikes(): Collection
+    {
+        return $this->commentLikes;
+    }
+
+    public function addCommentLike(CommentLike $commentLike): self
+    {
+        if (!$this->commentLikes->contains($commentLike)) {
+            $this->commentLikes[] = $commentLike;
+            $commentLike->setCommentaire($this);
+        }
+
+        return $this;
+    }
+
+    public function removeCommentLike(CommentLike $commentLike): self
+    {
+        if ($this->commentLikes->contains($commentLike)) {
+            $this->commentLikes->removeElement($commentLike);
+            // set the owning side to null (unless already changed)
+            if ($commentLike->getCommentaire() === $this) {
+                $commentLike->setCommentaire(null);
+            }
+        }
+
+        return $this;
+    }
+
+    public function isLikedCommentaireByUser(Users $user) : bool 
+    {
+        foreach ($this->commentLikes as $commentLike) {
+            if ($commentLike->getUser() === $user) return true;
+        }
+        return false;
+    }
+
 }

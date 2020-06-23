@@ -12,21 +12,11 @@
         <link rel="stylesheet" href="/css/bootstrap.css">
         <link rel="stylesheet" href="/css/fonts.css">
         <link rel="stylesheet" href="/css/style.css">
+
         {% block stylesheets %}{% endblock %}
     </head>
     <body id="resultat">
-        <div id="page-loader">
-            <div class="page-loader-body"><img src="/images/logo-default-130x42.png" alt="" width="130" height="42"/>
-                <div class="cssload-wrapper">
-                <div class="cssload-border">
-                    <div class="cssload-whitespace">
-                    <div class="cssload-line"></div>
-                    </div>
-                </div>
-                </div>
-            </div>
-        </div>
-        <div class="page">
+        <div >
         <header class="section page-header">
                 <!-- RD Navbar-->
                 <div class="rd-navbar-wrap">
@@ -238,11 +228,12 @@
                 </div>
             </footer>
 
-        {% block javascripts %}{% endblock %}
+        
         </div>
         <div class="snackbars" id="form-output-global"></div>
         <!-- Javascript-->
         <script src="/js/core.min.js"></script>
         <script src="/js/script.js"></script>
+        {% block javascripts %}{% endblock %}
     </body>
 </html>

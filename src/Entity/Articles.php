@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use App\Entity\Users;
 use Doctrine\ORM\Mapping as ORM;
 use App\Repository\ArticlesRepository;
 use Gedmo\Mapping\Annotation as Gedmo;
@@ -84,9 +85,15 @@ class Articles
      */
     private $categories;
 
+    /**
+     * @ORM\OneToMany(targetEntity=PostLike::class, mappedBy="article")
+     */
+    private $postLikes;
+
     public function __construct()
     {
         $this->commentaires = new ArrayCollection();
+        $this->postLikes = new ArrayCollection();
     }
 
     public function __toString()
@@ -219,5 +226,50 @@ class Articles
         $this->categories = $categories;
 
         return $this;
+    }
+
+    /**
+     * @return Collection|PostLike[]
+     */
+    public function getPostLikes(): Collection
+    {
+        return $this->postLikes;
+    }
+
+    public function addPostLike(PostLike $postLike): self
+    {
+        if (!$this->postLikes->contains($postLike)) {
+            $this->postLikes[] = $postLike;
+            $postLike->setArticle($this);
+        }
+
+        return $this;
+    }
+
+    public function removePostLike(PostLike $postLike): self
+    {
+        if ($this->postLikes->contains($postLike)) {
+            $this->postLikes->removeElement($postLike);
+            // set the owning side to null (unless already changed)
+            if ($postLike->getArticle() === $this) {
+                $postLike->setArticle(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * Pemet de savoir si un utilisateur a liker un article
+     *
+     * @param Users $user
+     * @return boolean
+     */
+    public function isLikedArticleByUser(Users $user) : bool 
+    {
+        foreach ($this->postLikes as $postLike) {
+            if ($postLike->getUser() === $user) return true;
+        }
+        return false;
     }
 }

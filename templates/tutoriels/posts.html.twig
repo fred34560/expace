@@ -28,8 +28,16 @@
                         <article class="post-single">
                             <div class="post-single__header">
                                 <ul class="post-single__meta">
-                                    <li><span class="icon mdi mdi-comment-outline"></span><a href="#">{{ article.commentaires|length }}</a></li>
-                                    <li><span class="icon mdi mdi-thumb-up-outline"></span><a href="#">12</a></li>
+                                    <li><span class="icon-primary mdi mdi-comment-outline"></span><a href="#">{{ article.commentaires|length }}</a></li>
+                                    <li>
+                                        {% if app.user and article.isLikedArticleByUser(app.user) %}
+                                            <span id= "get-like-article" class="icon-primary mdi mdi-thumb-up"></span>
+                                        {% else %}
+                                            <span id = "get-like-article" class="icon-primary mdi mdi-thumb-up-outline"></span>
+                                        {% endif %}
+                                        
+                                        <a class="nb-like-articles" href="#">{{article.postLikes|length}}</a>
+                                    </li>
                                 </ul>
                                 <ul class="post-single__meta">
                                     <li><span class="icon mdi icon mdi mdi-account"></span><span>par</span><a href="#">{{ article.users.pseudo }}</a></li>
@@ -45,14 +53,27 @@
                             {{ article.contenu|raw }}
                             <div class="post-single__footer">
                                 <div class="post-single__footer-inner">
-                                    <h5>Partager cette publication</h5>
+                                    <h5> <a href="">Partager cette publication</a> </h5>
                                     <ul class="list-inline list-inline-xs">
                                         <li><a class="icon icon-xs icon-gray-dark fa fa-facebook" href="#"></a></li>
                                         <li><a class="icon icon-xs icon-gray-dark fa fa-twitter" href="#"></a></li>
                                         <li><a class="icon icon-xs icon-gray-dark fa fa-google-plus" href="#"></a></li>
                                         <li><a class="icon icon-xs icon-gray-dark fa fa-pinterest-p" href="#"></a></li>
                                     </ul>
+                                    
                                 </div>
+                                    <div id="url-article-like" class="button button-sm button-icon button-icon-left button-primary button-ujarak">
+                                        <a class="js-article-like" style="color:#fff" href="{{ path('tutoriels_article_like', {'id': article.id}) }}">
+                                            {% if app.user and article.isLikedArticleByUser(app.user) %}
+                                            <span class="textLienArticle">Je n'aime plus</span> 
+                                            {% else %}
+                                            <span class="textLienArticle">J'aime cet article</span>     
+                                            {% endif %}
+                                            
+                                        </a> 
+                                    </div>
+                                    
+
                             </div>
                         </article>
                         <div class="section-md section-collapse">
@@ -77,8 +98,10 @@
                     <div class="section-md section-collapse">
                             <p class="custom-heading-line heading-8">Commentaires</p>
                             {% for commentaire in article.commentaires %}
+                                
+                                    {% if commentaire.parentId == null %}
                                 <div class="comment-group">
-                                    <!-- Comment-->
+                                    <!-- Comment-->    
                                     <article class="comment">
                                         <div class="comment__figure"><img class="comment__image" src="{{commentaire.users.avatar}}" alt="" width="82" height="82"/>
                                         </div>
@@ -111,8 +134,23 @@
                                             </div>
                                             <div class="comment__footer">
                                                 <ul class="comment__list">
-                                                    <li> <a class="comment__link" href="#"> <span class="icon mdi mdi-thumb-up-outline"> </span><span>12</span></a></li>
-                                                    <li><a class="comment__link" href="#"><span class="icon mdi mdi-comment-outline"></span><span>Reply</span></a></li>
+                                                    <li>
+                                                        <a class="comment__link js-comment-like" href="{{ path('tutoriels_commentaire_like', {'id': commentaire.id}) }}">
+                                                            {% if app.user and commentaire.isLikedCommentaireByUser(app.user) %}
+                                                                <span class="get-like-comment icon mdi mdi-thumb-up"></span>
+                                                            {% else %}
+                                                                <span class="get-like-comment icon mdi mdi-thumb-up-outline"></span>
+                                                            {% endif %}
+                                                            
+                                                            <span class="nb-like-comment">{{commentaire.commentLikes|length}}</span>
+                                                        </a>
+                                                    </li>
+                                                    <li>
+                                                        <a id="{{ commentaire.id }}" class="repondre comment__link" href="{{ commentaire.id }}">
+                                                            <span class="icon mdi mdi-comment-outline"></span>
+                                                            <span>Répondre</span>
+                                                        </a>
+                                                    </li>
                                                 </ul>
                                             </div>
                                         </div>
@@ -150,8 +188,23 @@
                                                 </div>
                                                 <div class="comment__footer">
                                                     <ul class="comment__list">
-                                                        <li> <a class="comment__link" href="#"> <span class="icon mdi mdi-thumb-up-outline"> </span><span>53</span></a></li>
-                                                        <li><a class="comment__link" href="#"><span class="icon mdi mdi-comment-outline"></span><span>Reply</span></a></li>
+                                                        <li>
+                                                            <a class="comment__link js-comment-like" href="{{ path('tutoriels_commentaire_like', {'id': reponse.id}) }}">
+                                                                {% if app.user and reponse.isLikedCommentaireByUser(app.user) %}
+                                                                    <span class="get-like-comment icon mdi mdi-thumb-up"></span>
+                                                                {% else %}
+                                                                    <span class="get-like-comment icon mdi mdi-thumb-up-outline"></span>
+                                                                {% endif %}
+                                                                
+                                                                <span class="nb-like-comment">{{reponse.commentLikes|length}}</span>
+                                                            </a>
+                                                        </li>
+                                                        <li>
+                                                            <a id="{{ reponse.parentId.id }}" class="repondre comment__link" href="#">
+                                                                <span class="icon mdi mdi-comment-outline"></span>
+                                                                <span>Répondre</span>
+                                                            </a>
+                                                        </li>
                                                     </ul>
                                                 </div>
                                             </div>
@@ -159,23 +212,28 @@
                                     </div>    
                                     {% endfor %}
                                 </div>
+                                {% endif %}
     
                             {% endfor %}
                             <div class="comment-box">
                                 <div class="unit flex-md-row flex-column">
-                                    <div class="unit__left"><img class="comment-box__image" src="/images/user-4-82x82.jpg" alt="" width="82" height="82"/>
+                                    <div class="unit__left"><img class="comment-box__image" src="{{app.user.avatar}}" alt="" width="82" height="82"/>
                                     </div>
                                     <div class="unit__body">
-                                        <p class="heading-8">Linda</p>
-                                        <form class="rd-mailform form_outline">
+                                        <p class="heading-8">{{app.user.pseudo}}</p>
+                                        {{ form_start(form, { 'attr': {'class': 'rd-mailform form_outline', 'data-form-output': 'form-output-global'} }) }}
                                             <div class="form-wrap">
-                                                <label class="form-label" for="comment-message">Write Your Comment...</label>
-                                                <textarea class="form-input" id="comment-message" name="message" data-constraints="@Required"></textarea>
+                                                {{ form_label(form.contenu, 'Write Your Comment...', {'label_attr': {'class': 'form-label'} }) }}
+                                                <div class="form-errors pb-1">
+                                                    {{ form_errors(form.contenu) }}
+                                                </div>
+                                                {{ form_widget(form.contenu, { 'attr': {'class': 'form-input', 'data-constraints': '@Required'} }) }}
                                             </div>
                                             <div class="form-button">
-                                                <button class="button button-lg button-primary button-ujarak" type="submit">Submit</button>
+                                                <button class="button button-lg button-primary button-ujarak" type="submit">Envoyer</button>
+                                                <input id="parent_id" type="hidden" name="parent_id" value="">
                                             </div>
-                                        </form>
+                                        {{ form_end(form) }}
                                     </div>
                                 </div>
                             </div>
@@ -191,5 +249,113 @@
             </div>
         </section>
 
+
+{% endblock %}
+
+{% block javascripts %}
+
+    <script>
+        $(document).ready(function(){
+
+            $('.repondre').click(function(e) {
+                e.preventDefault();
+                $('html,body').animate({scrollTop: $(".comment-box").offset().top}, 'slow');
+
+                id = $(this).attr('id');
+                console.log(id);
+                $('#parent_id').val(id);
+            });  
+            
+            
+            $(".js-article-like").click(function(e){
+                e.preventDefault();
+                $('.snackbars').addClass("active");
+                $('.snackbars').html('<p><span class="icon text-middle fa fa-circle-o-notch fa-spin icon-xxs"></span><span>Veuillez patienter, chargement en cours...</span></p>');
+
+                url = $(".js-article-like").attr("href");
+     
+                $.ajax({
+                url : url,
+                type : 'GET',
+                success : function(resultat){
+                    //console.log(resultat);
+                    $('.nb-like-articles').text(resultat.likes);
+
+                    if (resultat.message == 'suppression') {
+                        $('#get-like-article').removeClass('mdi-thumb-up').addClass('mdi-thumb-up-outline');
+                        $('.textLienArticle').html('J\'aime cet article');
+                        
+                    }
+                    if (resultat.message == 'ajout'){
+                        $('#get-like-article').removeClass('mdi-thumb-up-outline').addClass('mdi-thumb-up');
+                        $('.textLienArticle').html('Je n\'aime plus');
+
+                    }
+
+
+                    $('.snackbars').removeClass("active");
+                    
+                },
+
+                error : function(resultat){
+                    
+                },
+
+                complete : function(resultat){
+                    
+                }
+
+                });
+   
+            });
+
+
+            $(".js-comment-like").click(function(e){
+                e.preventDefault();
+                $('.snackbars').addClass("active");
+                $('.snackbars').html('<p><span class="icon text-middle fa fa-circle-o-notch fa-spin icon-xxs"></span><span>Veuillez patienter, chargement en cours...</span></p>');
+
+                url = this.href;
+                icone = this.querySelector('span');
+                spanCount = this.querySelector('span.nb-like-comment');
+                
+
+     
+                $.ajax({
+                url : url,
+                type : 'GET',
+                success : function(resultat){
+                    console.log(resultat);
+                    $(spanCount).text(resultat.likes);
+
+                    if (icone.classList.contains('mdi-thumb-up-outline')) {
+                        icone.classList.replace('mdi-thumb-up-outline', 'mdi-thumb-up');
+                    }
+                    else {
+                        icone.classList.replace('mdi-thumb-up', 'mdi-thumb-up-outline');
+                    }
+
+
+
+                    $('.snackbars').removeClass("active");
+                    
+                },
+
+                error : function(resultat){
+                    
+                },
+
+                complete : function(resultat){
+                    
+                }
+
+                });
+   
+            });
+
+
+        });
+                   
+    </script>
 
 {% endblock %}
