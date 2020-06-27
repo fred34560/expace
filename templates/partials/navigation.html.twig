@@ -1,21 +1,18 @@
 <!-- RD Navbar Nav-->
 <ul class="rd-navbar-nav">
-    <li><a href="index.html">Accueil</a></li>
-    <li><a href="about.html">About</a></li>
+    <li><a href="{{path('home')}}">Accueil</a></li>
+    <li><a href="{{path('home_services')}}">Services</a></li>
+    <!--
     <li><a href="services.html">Services</a>
-        <!-- RD Navbar Dropdown-->
         <ul class="rd-navbar-dropdown">
             <li><a href="single-service.html">Single service</a></li>
         </ul>
     </li>
-    <li><a href="blog.html">Blog</a>
-        <!-- RD Navbar Dropdown-->
-        <ul class="rd-navbar-dropdown">
-            <li><a href="blog-post.html">Blog post</a></li>
-        </ul>
-    </li>
+    -->
+    <li><a href="{{path('tutoriels_home')}}">Portfolio</a></li>
+    <li><a href="{{path('home_confidentialite')}}">Confidentialite</a></li>
+    <!--
     <li><a href="#">Pages</a>
-        <!-- RD Navbar Megamenu-->
         <ul class="rd-navbar-megamenu">
             <li>
                 <h5 class="rd-megamenu-header">Pages 1</h5>
@@ -52,5 +49,6 @@
             </li>
         </ul>
     </li>
-    <li><a href="contact-us.html">contact</a></li>
+    -->
+    <li><a href="{{path('home_contact')}}">contact</a></li>
 </ul>

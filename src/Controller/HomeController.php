@@ -28,12 +28,30 @@ class HomeController extends AbstractController
     }
 
     /**
-     * @Route("/contact", name="home_contact")
+     * @Route("/nous-contacter", name="home_contact")
      *
      * @return void
      */
     public function contact() {
         return $this->render('contact.html.twig');
+    }
+
+    /**
+     * @Route("/nos-services", name="home_services")
+     *
+     * @return void
+     */
+    public function services() {
+        return $this->render('services.html.twig');
+    }
+
+    /**
+     * @Route("/politique-de-confidentialite", name="home_confidentialite")
+     *
+     * @return void
+     */
+    public function confidentialite() {
+        return $this->render('confidentialite.html.twig');
     }
 
     
